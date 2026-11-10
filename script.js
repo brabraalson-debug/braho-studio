@@ -50,7 +50,7 @@ document.querySelector('.close').addEventListener('click',()=>dialog.close());do
 document.querySelectorAll('details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open)document.querySelectorAll('details').forEach(other=>{if(other!==detail)other.open=false;});}));
 // Set this to your public business email to enable the project enquiry button.
 const contactEmail='madebybraho@gmail.com';
-document.querySelector('#contact-button').addEventListener('click',()=>{if(contactEmail){location.href='mailto:'+contactEmail+'?subject=Project%20enquiry%20%E2%80%94%20Braho%20Studio';}else{document.querySelector('#contact-status').textContent='Project enquiries will open here soon. Braho Studio contact details are being updated.';}});
+document.querySelector('#contact-button').addEventListener('click',()=>{if(contactEmail){window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(contactEmail)+'&su='+encodeURIComponent('Project enquiry — Braho Studio'),'_blank','noopener,noreferrer');}else{document.querySelector('#contact-status').textContent='Project enquiries will open here soon. Braho Studio contact details are being updated.';}});
 document.querySelector('#year').textContent=new Date().getFullYear();
 
 // Ease horizontal logo travel toward document scroll position in either direction.
