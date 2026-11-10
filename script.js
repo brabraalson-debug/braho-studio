@@ -49,7 +49,7 @@ new MutationObserver(()=>document.body.classList.toggle('project-open',dialog.op
 document.querySelector('.close').addEventListener('click',()=>dialog.close());document.querySelector('.dialog-done').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 document.querySelectorAll('details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open)document.querySelectorAll('details').forEach(other=>{if(other!==detail)other.open=false;});}));
 // Set this to your public business email to enable the project enquiry button.
-const contactEmail='';
+const contactEmail='madebybraho@gmail.com';
 document.querySelector('#contact-button').addEventListener('click',()=>{if(contactEmail){location.href='mailto:'+contactEmail+'?subject=Project%20enquiry%20%E2%80%94%20Braho%20Studio';}else{document.querySelector('#contact-status').textContent='Project enquiries will open here soon. Braho Studio contact details are being updated.';}});
 document.querySelector('#year').textContent=new Date().getFullYear();
 
