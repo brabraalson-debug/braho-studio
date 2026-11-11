@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="{{ site.project.description if page == 'project' else site.hero.description }}">
+<meta name="theme-color" content="#14110f">
+<title>{% if page == 'project' %}The Last Prophecy — {% endif %}Braho Studio</title>
+<link rel="icon" href="{{ url_for('static', filename='images/studio-mark.svg') }}" type="image/svg+xml">
+<link rel="preload" href="{{ url_for('static', filename='fonts/display.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages.css') }}">
+<script src="{{ url_for('static', filename='js/site.js') }}" defer></script>
+</head>
+<body class="{{ page }}-page" id="home">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="header">
+  <a href="{{ url_for('home') }}#home" class="brand" aria-label="Braho Studio home">
+    <img src="{{ url_for('static', filename='images/studio-mark.svg') }}" alt="" width="96" height="24">
+    <span>Braho Studio</span>
+  </a>
+  <div class="header-actions"><a class="contact-link" href="{{ url_for('home') }}#contact">Let’s talk <span aria-hidden="true">↗</span></a><button class="menu-toggle" aria-haspopup="dialog" aria-controls="menu" aria-expanded="false" hidden>Menu <span aria-hidden="true">+</span></button></div>
+</header>
+<nav class="fallback-nav" aria-label="Main navigation"><a href="{{ url_for('home') }}#home">Home</a><a href="{{ url_for('home') }}#work">Work</a><a href="{{ url_for('home') }}#studio">Studio</a><a href="{{ url_for('home') }}#contact">Contact</a></nav>
+<dialog id="menu" aria-labelledby="menu-title">
+  <div class="menu-top"><p id="menu-title" class="eyebrow">Braho Studio / Navigation</p><button class="menu-close" aria-label="Close menu">Close ×</button></div>
+  <nav aria-label="Main navigation">
+    {% for anchor,label in [('home','Home'),('work','Work'),('studio','Studio'),('contact','Contact')] %}<a href="{{ url_for('home') }}#{{ anchor }}"><span class="eyebrow">0{{ loop.index }}</span>{{ label }}<span aria-hidden="true">↗</span></a>{% endfor %}
+  </nav>
+  <p class="menu-foot">Images with atmosphere. Identities with character.</p>
+</dialog>
+<main id="main">{% block content %}{% endblock %}</main>
+<footer>
+  <a class="footer-mark" href="{{ url_for('home') }}#home" aria-label="Braho Studio home"><img src="{{ url_for('static', filename='images/studio-mark.svg') }}" width="120" height="30" alt="Braho Studio"></a>
+  <p>© {{ copyright_year }} Braho Studio</p><a href="#home">Back to top ↑</a>
+</footer>
+</body>
+</html>

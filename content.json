@@ -1,0 +1,103 @@
+{
+  "name": "Braho Studio",
+  "archive_year": "2027",
+  "hero": {
+    "headline": [
+      "Images with",
+      "atmosphere.",
+      "Identities with",
+      "character."
+    ],
+    "description": "Graphic design shaped through typography, texture, and symbolism.",
+    "primary": "Explore the work",
+    "secondary": "Start a conversation"
+  },
+  "work": {
+    "heading": "Selected work",
+    "intro": "Symbols, surfaces, and stories brought into focus."
+  },
+  "project": {
+    "title": "The Last Prophecy",
+    "slug": "the-last-prophecy",
+    "discipline": "Poster design / Visual exploration",
+    "description": "Medieval references meet distressed typography and intricate ornament. The Last Prophecy explores a single visual language through crimson, muted pink and green, and weathered metallic tones.",
+    "variations": [
+      {
+        "image": "crimson",
+        "label": "Dark & red",
+        "alt": "The Last Prophecy poster with crimson branching ornament on a dark textured ground."
+      },
+      {
+        "image": "rose",
+        "label": "Pink & green",
+        "alt": "The Last Prophecy poster with green medieval ornament across a distressed pink surface."
+      },
+      {
+        "image": "metal",
+        "label": "Weathered metallic",
+        "alt": "The Last Prophecy poster in weathered bronze tones with intricate embossed-looking ornament."
+      },
+      {
+        "image": "type",
+        "label": "Typographic treatment",
+        "alt": "The Last Prophecy poster featuring tall, narrow lettering and crimson ornament on an aged bronze ground."
+      }
+    ]
+  },
+  "marks": {
+    "heading": "Marks & Experiments",
+    "description": "Independent studies in gesture, balance, and recognition.",
+    "items": [
+      {
+        "file": "studio-mark.svg",
+        "label": "Braho Studio",
+        "note": "Provisional studio mark",
+        "alt": "Braho Studio mark, a sweeping angular gesture."
+      },
+      {
+        "file": "wing-mark.svg",
+        "label": "Wing study",
+        "note": "Symbol exploration",
+        "alt": "A symmetrical wing-like symbol with pointed, curling forms."
+      },
+      {
+        "file": "sxc-mark.svg",
+        "label": "SXC",
+        "note": "Letterform experiment",
+        "alt": "SXC lettering beneath a four-point symbol.",
+        "light": true
+      }
+    ]
+  },
+  "studio": {
+    "heading": "A distinct point of view.",
+    "body": "Braho Studio explores the space between historical imagery and contemporary graphic design. Expressive typography, intricate symbols, and tactile surfaces come together in work with a strong visual character.",
+    "practice": [
+      [
+        "Visual identity",
+        "Marks and graphic systems with a recognizable presence."
+      ],
+      [
+        "Poster design",
+        "Image and typography composed for impact."
+      ],
+      [
+        "Visual exploration",
+        "Studies in texture, symbolism, and alternative treatments."
+      ]
+    ]
+  },
+  "contact": {
+    "heading": "Have something in mind?",
+    "line": "Let’s give it a visual language.",
+    "body": "For projects, collaborations, and enquiries, get in touch.",
+    "email": "madebybraho@gmail.com",
+    "socials": [
+      {
+        "label": "Instagram @alsbraho",
+        "url": "https://www.instagram.com/alsbraho/"
+      }
+    ],
+    "missing": "Preview — email and social links are awaiting your details."
+  }
+}

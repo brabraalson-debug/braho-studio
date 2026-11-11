@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import picture with context %}
+{% block content %}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-texture" aria-hidden="true"></div>
+  <div class="portrait-stage">
+    <picture class="hero-portrait">
+      {% set mobile=images['portrait-mobile'] %}
+      <source media="(max-width: 700px)" type="image/webp" srcset="{% for width in mobile.sizes %}{{ url_for('static', filename='images/portrait-mobile-' ~ width ~ '.webp') }} {{ width }}w{% if not loop.last %}, {% endif %}{% endfor %}" sizes="100vw">
+      <source type="image/webp" srcset="{% for width in images.portrait.sizes %}{{ url_for('static', filename='images/portrait-' ~ width ~ '.webp') }} {{ width }}w{% if not loop.last %}, {% endif %}{% endfor %}" sizes="(max-width: 1000px) 62vw, 55vw">
+      <img src="{{ url_for('static', filename='images/portrait.jpg') }}" width="{{ images.portrait.width }}" height="{{ images.portrait.height }}" alt="the artist seated in a wicker chair, looking right in warm amber sunlight." fetchpriority="high">
+    </picture>
+    <div class="portrait-shade" aria-hidden="true"></div>
+  </div>
+  <div class="hero-copy">
+    <p class="eyebrow hero-kicker">Braho Studio <span>Archive / {{ site.archive_year }}</span></p>
+    <h1 id="hero-title">{% for line in site.hero.headline %}<span class="headline-line"><span>{{ line }}</span></span>{% endfor %}</h1>
+    <p class="hero-description">{{ site.hero.description }}</p>
+    <div class="hero-actions"><a class="button magnetic" href="#work"><span>{{ site.hero.primary }} ↗</span></a><a class="text-link" href="#contact">{{ site.hero.secondary }} ↗</a></div>
+  </div>
+  <div class="hero-bottom"><span class="eyebrow">01 / Introduction</span><a href="#work" class="eyebrow">Scroll to discover <span aria-hidden="true">↓</span></a></div>
+</section>
+
+<section id="work" class="work-section section">
+  <div class="section-top"><p class="eyebrow">02 / Selected work</p><span class="eyebrow">Graphic design & visual exploration</span></div>
+  <div class="section-intro"><h2>{{ site.work.heading }}</h2><p>{{ site.work.intro }}</p></div>
+  <a class="project-preview" href="{{ url_for('project') }}" aria-label="View The Last Prophecy project">
+    <div class="preview-atmosphere" aria-hidden="true"></div>
+    {{ picture('crimson', site.project.variations[0].alt, '(max-width: 700px) 76vw, 40vw', class_name='shared-art') }}
+    <span class="view-project">View project <span aria-hidden="true">↗</span></span>
+    <span class="preview-label eyebrow">The Last Prophecy<br>One series / Four treatments</span>
+  </a>
+  <div class="project-caption"><h3><a href="{{ url_for('project') }}">{{ site.project.title }} ↗</a></h3><div><p>{{ site.project.description }}</p><span class="eyebrow">{{ site.project.discipline }}</span></div></div>
+  <div class="colour-comparison">
+    {% for variation in site.project.variations[1:3] %}
+    <figure><a href="{{ url_for('project') }}#{{ variation.image }}" aria-label="Explore {{ variation.label }} treatment">{{ picture(variation.image, variation.alt, '(max-width: 700px) 90vw, 44vw') }}</a><figcaption><span>{{ variation.label }}</span><span class="eyebrow">The Last Prophecy</span></figcaption></figure>
+    {% endfor %}
+  </div>
+  <div class="detail-band">
+    {{ picture('ornament-detail', 'Close-up of The Last Prophecy’s intricate metallic ornament and textured surface.', '(max-width: 700px) 90vw, 60vw') }}
+    <div><p class="eyebrow">A closer look</p><h3>History in the details.</h3><p>Branching forms, worn surfaces, and lettering that feels unearthed.</p><a class="text-link" href="{{ url_for('project') }}">Explore the full series ↗</a></div>
+  </div>
+</section>
+
+<section class="marks-section section" aria-labelledby="marks-title">
+  <div class="section-intro"><div><p class="eyebrow">Studies / Symbols</p><h2 id="marks-title">{{ site.marks.heading }}</h2></div><p>{{ site.marks.description }}</p></div>
+  <div class="marks-grid">{% for mark in site.marks['items'] %}<figure><div class="mark-display {% if mark.light %}light{% endif %}"><img src="{{ url_for('static',filename='images/' ~ mark.file) }}" width="385" height="200" loading="lazy" alt="{{ mark.alt }}"></div><figcaption><span>{{ mark.label }}</span><span class="eyebrow">{{ mark.note }}</span></figcaption></figure>{% endfor %}</div>
+</section>
+
+<section id="studio" class="studio-section section">
+  <div class="section-top"><p class="eyebrow">03 / Studio</p><span class="eyebrow">A personal practice</span></div>
+  <div class="studio-grid">
+    <figure>{{ picture('portrait', 'Environmental portrait of the artist seated in a wicker chair among sunlit, weathered materials.', '(max-width: 700px) 90vw, 44vw') }}<figcaption class="eyebrow">Braho Studio / Behind the work</figcaption></figure>
+    <div class="studio-copy"><h2>{{ site.studio.heading }}</h2><p>{{ site.studio.body }}</p><dl>{% for title,description in site.studio.practice %}<div><dt>{{ title }}</dt><dd>{{ description }}</dd></div>{% endfor %}</dl></div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section section">
+  <p class="eyebrow">04 / Contact</p><p class="contact-question">{{ site.contact.heading }}</p>
+  <h2>{{ site.contact.line }}</h2><p class="contact-body">{{ site.contact.body }}</p>
+  <div class="contact-options">
+    {% if site.contact.email %}<a class="button magnetic" href="mailto:{{ site.contact.email }}"><span>{{ site.contact.email }} ↗</span></a>{% endif %}
+    {% for social in site.contact.socials %}<a class="text-link" href="{{ social.url }}">{{ social.label }} ↗</a>{% endfor %}
+    {% if not site.contact.email and not site.contact.socials %}<p class="preview-note">{{ site.contact.missing }}</p>{% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,82 @@
+@font-face { font-family: Barlow Condensed; src: url("../fonts/display.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: Instrument Sans; src: url("../fonts/body.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+:root { --ink:#14110f; --brown:#241b17; --ivory:#e9dfd0; --amber:#b96d35; --crimson:#652833; --bronze:#8b7656; --muted:#bcb0a2; --line:#e9dfd02e; --gutter:clamp(22px,5vw,88px); color-scheme:dark; background:var(--ink); color:var(--ivory); font:400 16px/1.6 "Instrument Sans",sans-serif; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:100px; }
+body { margin:0; }
+body.modal-open { overflow:hidden; }
+img { display:block; max-width:100%; height:auto; }
+picture { display:block; }
+a { color:inherit; text-decoration:none; }
+button { font:inherit; color:inherit; cursor:pointer; }
+button, a { -webkit-tap-highlight-color:transparent; }
+a:focus-visible, button:focus-visible { outline:2px solid #efb781; outline-offset:5px; }
+h1,h2,h3,p,figure { margin:0; }
+h1,h2,h3 { text-wrap:balance; }
+h1,h2 { font-family:"Barlow Condensed",Impact,"Arial Narrow",sans-serif; font-weight:600; text-transform:uppercase; line-height:.91; letter-spacing:-.025em; }
+h2 { font-size:clamp(58px,7.8vw,120px); }
+h3 { font-weight:500; font-size:clamp(25px,3vw,42px); line-height:1.15; letter-spacing:-.035em; }
+p { text-wrap:pretty; }
+section[id], figure[id] { scroll-margin-top:100px; }
+::selection { background:var(--crimson); color:var(--ivory); }
+.eyebrow { font:400 10px/1.6 "Courier New",monospace; text-transform:uppercase; letter-spacing:.12em; }
+.section { padding:clamp(70px,9vw,145px) max(var(--gutter),env(safe-area-inset-right)) clamp(70px,9vw,145px) max(var(--gutter),env(safe-area-inset-left)); }
+.section-top { display:flex; gap:20px; justify-content:space-between; padding-bottom:28px; border-top:1px solid var(--line); padding-top:18px; }
+.section-intro { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:24px; align-items:end; margin-bottom:55px; }
+.section-intro > :first-child { grid-column:1/9; }
+.section-intro > p { grid-column:9/13; max-width:28ch; color:var(--muted); }
+.section-intro .eyebrow { margin-bottom:16px; }
+.text-link { display:inline-flex; align-items:center; min-height:44px; border-bottom:1px solid var(--bronze); font-size:13px; }
+.text-link:hover { color:#efb781; }
+.button { display:inline-flex; min-height:50px; align-items:center; font-size:13px; }
+.button > span { display:block; padding:13px 22px; background:var(--ivory); color:var(--ink); transition:transform .25s,background .25s; }
+.button:hover > span { background:#e5b78f; }
+.skip-link { position:fixed; z-index:20; top:10px; left:20px; padding:12px; background:var(--ivory); color:var(--ink); transform:translateY(-160%); }
+.skip-link:focus { transform:none; }
+.header { position:fixed; z-index:10; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px var(--gutter); min-height:80px; background:linear-gradient(#14110ff0,#14110fbe); backdrop-filter:blur(14px); border-bottom:1px solid #e9dfd014; }
+.brand { display:flex; align-items:center; gap:18px; min-height:44px; }
+.brand img { width:84px; height:auto; }
+.brand span { font-size:11px; text-transform:uppercase; letter-spacing:.09em; }
+.header-actions { display:flex; align-items:center; gap:clamp(20px,3vw,50px); }
+.contact-link { display:flex; gap:16px; align-items:center; min-height:44px; font-size:12px; }
+.menu-toggle,.menu-close,.lightbox-close { border:0; padding:12px 0 12px 12px; min-width:60px; min-height:44px; background:transparent; font-size:12px; }
+.menu-toggle span { margin-left:16px; }
+.fallback-nav { margin-top:80px; display:flex; gap:25px; padding:10px var(--gutter); }
+.fallback-nav a { display:flex; align-items:center; min-height:44px; }
+.enhanced .fallback-nav { display:none; }
+dialog { color:var(--ivory); background:var(--ink); border:1px solid var(--line); padding:0; }
+dialog::backdrop { background:#090706c9; backdrop-filter:blur(8px); }
+#menu { width:100%; max-width:100%; height:100dvh; max-height:100dvh; margin:0; padding:24px var(--gutter); border:0; }
+.menu-top { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+#menu nav { margin:clamp(40px,8vh,90px) 0; }
+#menu nav a { display:flex; align-items:center; gap:24px; padding:12px 0; border-bottom:1px solid var(--line); font:600 clamp(48px,8vw,100px)/1.1 "Barlow Condensed",sans-serif; text-transform:uppercase; }
+#menu nav a > :last-child { margin-left:auto; font-size:.6em; }
+#menu nav a:hover { color:#efb781; }
+.menu-foot { color:var(--muted); font-size:13px; }
+figure figcaption { display:flex; justify-content:space-between; gap:16px; font-size:13px; padding-top:14px; }
+figcaption .eyebrow { color:var(--muted); }
+footer { display:flex; align-items:center; justify-content:space-between; gap:24px; border-top:1px solid var(--line); padding:30px var(--gutter); font-size:11px; }
+footer a { min-height:44px; display:flex; align-items:center; }
+footer p { color:var(--muted); }
+.footer-mark img { width:100px; }
+@view-transition { navigation:auto; }
+.shared-art { view-transition-name:prophecy; }
+::view-transition-old(prophecy), ::view-transition-new(prophecy) { animation-duration:700ms; }
+@media(max-width:700px) {
+  html { scroll-padding-top:76px; }
+  .header { min-height:70px; padding-block:10px; }
+  .brand { gap:9px; }
+  .brand img { width:64px; }
+  .brand span { display:none; }
+  .header-actions { gap:18px; }
+  .section-intro { grid-template-columns:1fr; gap:25px; margin-bottom:35px; }
+  .section-intro > :first-child,.section-intro > p { grid-column:1; }
+  .section-top > :last-child:not(:first-child) { display:none; }
+  footer { flex-wrap:wrap; gap:12px; }
+  footer p { order:3; width:100%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; }
+  .hero-portrait,.hero-texture,.project-preview,.magnetic > span { transform:none!important; }
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*) { animation:none!important; }
+}

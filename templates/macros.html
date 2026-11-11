@@ -1,0 +1,7 @@
+{% macro picture(name, alt, sizes='100vw', priority=false, class_name='') -%}
+{% set asset = images[name] %}
+<picture class="{{ class_name }}">
+  <source type="image/webp" srcset="{% for width in asset.sizes %}{{ url_for('static', filename='images/' ~ name ~ '-' ~ width ~ '.webp') }} {{ width }}w{% if not loop.last %}, {% endif %}{% endfor %}" sizes="{{ sizes }}">
+  <img src="{{ url_for('static', filename='images/' ~ name ~ '.jpg') }}" width="{{ asset.width }}" height="{{ asset.height }}" alt="{{ alt }}" {% if priority %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+</picture>
+{%- endmacro %}
