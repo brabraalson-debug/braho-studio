@@ -155,3 +155,73 @@ for (const eventName of ["pageswap", "pagereveal"]) {
     event.viewTransition?.ready.catch(() => {});
   });
 }
+
+const processDeck = document.querySelector(".process-deck");
+
+if (processDeck) {
+  const cards = Array.from(processDeck.querySelectorAll(".deck-card"));
+  const dots = Array.from(processDeck.querySelectorAll(".deck-dot"));
+  const controls = processDeck.querySelector(".deck-controls");
+  const next = processDeck.querySelector(".deck-next");
+  const status = processDeck.querySelector(".deck-status");
+  const duration = 640;
+  let shuffling = false;
+
+  function pose(depth) {
+    return `translate3d(${depth * 9}px, ${depth * -10}px, ${depth * -27}px) rotate(${-3 + depth * 2}deg)`;
+  }
+
+  function showCard(card, active) {
+    card.toggleAttribute("data-active", active);
+    card.toggleAttribute("inert", !active);
+    card.setAttribute("aria-hidden", String(!active));
+  }
+
+  function settle() {
+    const launched = cards.shift();
+    launched.querySelector("details").open = false;
+    cards.push(launched);
+    for (const [depth, card] of cards.entries()) {
+      card.style.setProperty("--depth", depth);
+      showCard(card, depth === 0);
+    }
+    const index = Number(cards[0].dataset.index);
+    dots.forEach((dot, position) => dot.toggleAttribute("data-active", position === index));
+    const title = cards[0].querySelector(".deck-card-title").textContent;
+    status.textContent = `Card ${index + 1} of ${cards.length}: ${title}`;
+    shuffling = false;
+  }
+
+  next.addEventListener("click", async () => {
+    if (shuffling) return;
+    shuffling = true;
+    if (motionPreference.matches || !document.timeline || !cards[0].animate) {
+      settle();
+      return;
+    }
+
+    const start = document.timeline.currentTime;
+    const back = cards.length - 1;
+    const animations = cards.map((card, depth) => {
+      const keyframes = depth === 0 ? [
+        { offset: 0, transform: pose(0), opacity: 1, zIndex: 6, easing: "cubic-bezier(.45,0,.85,.6)" },
+        { offset: .50, transform: "translate3d(108%,-65%,100px) rotate(25deg)", opacity: 0, zIndex: 6 },
+        { offset: .51, transform: pose(back + 1), opacity: 0, zIndex: 1, easing: "ease-out" },
+        { offset: 1, transform: pose(back), opacity: 1, zIndex: 1 }
+      ] : [
+        { offset: 0, transform: pose(depth) },
+        { offset: .12 + depth * .035, transform: pose(depth), easing: "cubic-bezier(.2,.75,.24,1)" },
+        { offset: 1, transform: pose(depth - 1) }
+      ];
+      const animation = card.animate(keyframes, { duration, fill: "both" });
+      animation.startTime = start;
+      return animation;
+    });
+
+    await Promise.allSettled(animations.map(animation => animation.finished));
+    settle();
+    animations.forEach(animation => animation.cancel());
+  });
+
+  controls.hidden = false;
+}
